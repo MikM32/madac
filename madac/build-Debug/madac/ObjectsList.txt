@@ -1,0 +1,1 @@
+../build-Debug/madac/up_lexico.c.o ../build-Debug/madac/up_linked_list.c.o ../build-Debug/madac/up_hashmap.c.o ../build-Debug/madac/up_sintatico.c.o ../build-Debug/madac/up_errores.c.o ../build-Debug/madac/up_arbol_tipos.c.o ../build-Debug/madac/up_utiles.c.o ../build-Debug/madac/up_tokens.c.o ../build-Debug/madac/up_interprete.c.o ../build-Debug/madac/up_main.c.o

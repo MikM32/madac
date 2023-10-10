@@ -1,0 +1,50 @@
+/// + <---> Una o mas veces
+/// * <---> Cero o mas veces
+/// ! <---> Una o cero veces
+<
+
+algoritmo = "algoritmo" identificador (decproc | decfunc)* cuerpo "fin";
+decproc = "proc" identificador "(" (("ref" | "val")! declaracion)* ")" cuerpo "fproc";
+decfunc = "func" identificador "(" (("ref" | "val")! declaracion)* ")" ":" tipos cuerpo "ffunc";
+
+cuerpo = (const | tipo | var)! inicio;
+
+tipo = "tipo" (identificador "=" tipos)+ ;
+const = "const" (identificador "=" expresion)+ ;
+var = "var" (declaracion)+;
+inicio = "inicio" bloque ;
+
+bloque = (mientras | para | repetir | cond_si | cond_selec| asignacion | llamada) ;
+
+para = "para" (asignacion |identificador | primario) "hasta" ( identificador |primario) "hacer" (bloque) "fpara" ;
+mientras = "mientras" (identificador | expresion) "hacer" bloque "fmientras";
+repetir = "repetir" bloque "mientras" (identificador | expresion)
+
+cond_si = "si" (identificador | expresion) "entonces" bloque ((("sino si") bloque)* "sino" bloque)* "fsi"
+cond_selec = "seleccion"  (identificador | expresion) ("caso" (identificador | expresion) bloque)+ "fseleccion"
+
+asignacion = identificador "<-" (expresion | identificador | llamada);
+
+declaracion = identificador ("," identificador)* ":" tipos;
+llamada = identificador "(" ( (identificador| expresion) ",")* ")" ;
+
+expresion = igualdad;
+igualdad = comparacion ( ("<>" | "=") comparacion)*;
+
+comparacion = termino ( ("<=" | ">=" | "<" | ">") termino)*;
+
+termino = factor ( ("-" | "+" ) factor)*
+
+factor = unario (("/" | "*" | "div" | "mod") unario)*;
+
+unario = ("not" | "-") unario | primario;
+
+primario =  numero | caracter | cadena | "verdadero" | "falso" | llamada | "(" expresion ")";
+tipos = ("entero" | "real" | "caracter" | "logico" | identificador);
+identificador = ("_")*(letra)+(letra | numero | "_")* ;
+caracter = chars
+cadena = \" chars+ \"
+letra = "a"-"z" | "A"-"Z";
+numero = "0"-"9" ;
+chars = ascii 0-254
+>
